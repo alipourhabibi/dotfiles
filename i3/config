@@ -10,11 +10,14 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
-#
+
 # persian keyboard
 exec_always "setxkbmap -model pc104 -layout us,ir -option grp:alt_shift_toggle"
 exec_always "xrandr --output HDMI1 --output eDP1"
 exec_always "mons -d"
+
+# devilspie for gnome-terminal transparency
+exec "devilspie"
 
 # wallpaper
 exec_always feh --bg-scale /home/ali/.config/i3/scifiearth.jpg
@@ -314,4 +317,5 @@ exec --no-startup-id start_conky_maia
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 
-exec --no-startup-id i3-battery-popup
+exec --no-startup-id i3-battery-popup -L 20 -l 15
+
