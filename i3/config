@@ -17,7 +17,7 @@ exec_always "xrandr --output HDMI1 --output eDP1"
 exec_always "mons -d"
 
 # devilspie for gnome-terminal transparency
-exec_always "devilspie"
+# exec_always "devilspie"
 
 # wallpaper
 exec_always feh --bg-scale /home/ali/.config/i3/scifiearth.jpg
@@ -57,7 +57,7 @@ floating_modifier $mod
 # start a terminal
 # bindsym $mod+Return exec i3-sensible-terminal
 #bindsym $mod+Return exec konsole
-bindsym $mod+Return exec gnome-terminal
+bindsym $mod+Return exec konsole
 
 # kill focused window
 bindsym $mod+Shift+q kill
