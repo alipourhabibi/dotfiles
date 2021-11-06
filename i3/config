@@ -17,7 +17,7 @@ exec_always "xrandr --output HDMI1 --output eDP1"
 exec_always "mons -d"
 
 # devilspie for gnome-terminal transparency
-exec "devilspie"
+exec_always "devilspie"
 
 # wallpaper
 exec_always feh --bg-scale /home/ali/.config/i3/scifiearth.jpg
