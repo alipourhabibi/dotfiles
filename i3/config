@@ -20,7 +20,7 @@ exec_always "mons -d"
 # exec_always "devilspie"
 
 # wallpaper
-exec_always feh --bg-scale /home/ali/.config/i3/scifiearth.jpg
+exec_always feh --bg-scale /home/ali/.config/i3/eren.jpg
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -35,7 +35,7 @@ font pango:System San Francisco Display 10
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec_always --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec_always --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --i ~/.config/i3/lock.png
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
