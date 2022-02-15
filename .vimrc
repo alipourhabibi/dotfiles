@@ -7,6 +7,9 @@ set incsearch
 set scrolloff=8
 set colorcolumn=80
 
+" turn off GoImport on save
+let g:go_fmt_command = "gofmt"
+
 filetype off                  " required
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -26,6 +29,8 @@ Plugin 'junegunn/fzf.vim'
 
 Plugin 'vim-airline/vim-airline'
 
+Plugin 'fatih/vim-go'
+
 call vundle#end()            " required
 
 filetype plugin indent on    " required
@@ -43,3 +48,6 @@ nnoremap tk :tabnext<CR>
 nnoremap tj :tabprev<CR>
 nnoremap th :tabfirst<CR>
 nnoremap tl :tablast<CR>
+
+set errorformat^=%-GIn\ file\ included\ %.%# 
+
