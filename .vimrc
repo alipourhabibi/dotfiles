@@ -50,4 +50,5 @@ nnoremap th :tabfirst<CR>
 nnoremap tl :tablast<CR>
 
 set errorformat^=%-GIn\ file\ included\ %.%# 
-
+autocmd VimEnter * hi Normal ctermbg=none
+let g:gruvbox_transparent_bg=1
