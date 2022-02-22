@@ -52,3 +52,5 @@ nnoremap tl :tablast<CR>
 set errorformat^=%-GIn\ file\ included\ %.%# 
 autocmd VimEnter * hi Normal ctermbg=none
 let g:gruvbox_transparent_bg=1
+autocmd FileType javascript setlocal ts=4 sts=4 sw=4
+autocmd FileType typescript setlocal ts=4 sts=4 sw=4
