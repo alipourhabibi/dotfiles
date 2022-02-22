@@ -20,7 +20,7 @@ exec_always "mons -d"
 # exec_always "devilspie"
 
 # wallpaper
-exec_always feh --bg-scale /home/ali/.config/i3/eren2.jpg
+exec_always feh --bg-scale /home/ali/.config/i3/in-the-rain.png
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
