@@ -42,6 +42,7 @@ let mapleader = " "
 nnoremap <C-p> :NERDTree<CR>
 nnoremap <C-h> :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>ff :Files<CR>
+nnoremap <leader>F :Rg<CR>
 
 nnoremap tn :tabnew<Space>
 nnoremap tk :tabnext<CR>
