@@ -31,6 +31,8 @@ Plugin 'vim-airline/vim-airline'
 
 Plugin 'fatih/vim-go'
 
+Plugin 'tpope/vim-fugitive'
+
 call vundle#end()            " required
 
 filetype plugin indent on    " required
