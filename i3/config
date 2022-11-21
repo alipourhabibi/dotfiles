@@ -13,7 +13,7 @@ set $mod Mod4
 
 # persian keyboard
 exec_always "setxkbmap -model pc104 -layout us,ir -option grp:alt_shift_toggle"
-exec_always "xrandr --output HDMI1 --output eDP1"
+exec_always "xrandr --output HDMI-2 --output eDP-1"
 exec_always "mons -d"
 
 # devilspie for gnome-terminal transparency
