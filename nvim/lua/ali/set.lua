@@ -37,3 +37,6 @@ vim.opt.colorcolumn = "80"
 
 vim.g.mapleader = " "
 
+vim.o.smartindent = true
+
+vim.cmd [[ set mouse=]]
