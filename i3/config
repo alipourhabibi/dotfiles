@@ -162,7 +162,8 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 # assign [class="konsole"] $ws1
 assign [class="konsole"] $ws1
 assign [class="firefox"] $ws2
-assign [class="Spotify"] $ws10
+assign [class="discord"] $ws4
+for_window [class="Spotify"] move to workspace $ws10
 assign [class="TelegramDesktop"] $ws3
 
 # reload the configuration file
