@@ -9,7 +9,11 @@ nnoremap("th", "<cmd>tabfirst<CR>")
 nnoremap("tl", "<cmd>tablast<CR>")
 
 nnoremap("<C-h>", "<cmd>lua vim.lsp.buf.definition()<CR>")
-nnoremap("<C-H>", "<cmd>lua vim.lsp.buf.references()<CR>")
+nnoremap("<C-i>", "<cmd>lua vim.lsp.buf.references()<CR>")
 
 nnoremap("<leader>ff", "<cmd>Telescope find_files<CR>")
 nnoremap("<leader>F", "<cmd>Telescope live_grep<CR>")
+
+nnoremap("<leader>y", '"+y')
+nnoremap("<leader>p", '"+p')
+nnoremap('<space>e', '<cmd>lua vim.diagnostic.open_float(0, {scope="line"})<CR>')

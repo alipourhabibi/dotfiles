@@ -1,4 +1,5 @@
 require("ali")
+require'lspconfig'.tsserver.setup {}
 require'lspconfig'.pyright.setup{}
 require'lspconfig'.gopls.setup{}
 require'lspconfig'.sumneko_lua.setup {
