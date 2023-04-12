@@ -1,0 +1,4 @@
+fn ali() {
+    print!()
+        println!
+}
