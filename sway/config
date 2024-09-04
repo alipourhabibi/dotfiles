@@ -333,3 +333,5 @@ input type:touchpad {
     tap enabled
     natural_scroll enabled
 }
+
+for_window [app_id=".*"] border pixel 0
