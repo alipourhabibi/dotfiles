@@ -23,7 +23,7 @@ return require('packer').startup(function(use)
 
   -- Telescope
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.0',
+    'nvim-telescope/telescope.nvim', tag = '0.1.8',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
 
@@ -34,5 +34,12 @@ return require('packer').startup(function(use)
 
   use('williamboman/mason.nvim')
   use('williamboman/mason-lspconfig.nvim')
+
+  use('mfussenegger/nvim-dap')
+  use('leoluz/nvim-dap-go')
+  use('nvim-neotest/nvim-nio')
+  use('rcarriga/nvim-dap-ui')
+
+  use 'kyazdani42/nvim-web-devicons'
 
 end)

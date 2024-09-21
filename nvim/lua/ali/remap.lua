@@ -42,3 +42,8 @@ vim.api.nvim_set_keymap('n', '<F5>', ':lua require"dap".continue()<CR>', {norema
 vim.api.nvim_set_keymap('n', '<F6>', ':lua require"dap".step_over()<CR>', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<F7>', ':lua require"dap".step_into()<CR>', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<F8>', ':lua require"dap".step_out()<CR>', {noremap = true, silent = true})
+
+vim.api.nvim_set_keymap('n', '<leader>du', "<Cmd>lua require'dapui'.toggle()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>de', "<Cmd>lua require'dapui'.eval()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<leader>de', "<Cmd>lua require'dapui'.eval()<CR>", { noremap = true, silent = true })  -- Evaluate in visual mode
+vim.api.nvim_set_keymap('n', '<leader>df', "<Cmd>lua require'dapui'.float_element()<CR>", { noremap = true, silent = true })
