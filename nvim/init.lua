@@ -1,36 +1,13 @@
 require("ali")
 require('telescope').setup()
+
+-- LSP Configs
+require'lspconfig'.lua_ls.setup{}
 require'lspconfig'.yamlls.setup{}
 require'lspconfig'.gopls.setup{}
 require'lspconfig'.pyright.setup{}
-
-require'lspconfig'.tsserver.setup {}
-require'lspconfig'.sumneko_lua.setup {
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file("", true),
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
-      },
-    },
-  },
-}
-
 require'lspconfig'.asm_lsp.setup{}
-vim.o.clipboard = "unnamedplus"
-vim.o.mouse = "a"
+
 
 -- Mason Setup
 require("mason").setup({
@@ -47,7 +24,7 @@ require("mason-lspconfig").setup()
 require('nio')
 
 require('dap')
-require('dapui')
+require('dapui').setup{}
 
 require('dap-go').setup({
   -- Additional dap configurations can be added.
