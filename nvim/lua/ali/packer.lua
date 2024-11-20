@@ -42,4 +42,21 @@ return require('packer').startup(function(use)
 
   use('kyazdani42/nvim-web-devicons')
 
+  use({
+  "epwalsh/obsidian.nvim",
+  tag = "*",  -- recommended, use latest release instead of latest commit
+    requires = {
+      -- Required.
+      "nvim-lua/plenary.nvim",
+    },
+  })
+
+  use {
+  'nvim-lualine/lualine.nvim',
+  requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+  }
+  use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
+
+  vim.opt.conceallevel = 1
+
 end)
