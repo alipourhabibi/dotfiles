@@ -17,6 +17,7 @@ require("obsidian").setup({
   }
 })
 
+require('lualine').setup{}
 require("bufferline").setup{
       options = {
         mode = "tabs",
