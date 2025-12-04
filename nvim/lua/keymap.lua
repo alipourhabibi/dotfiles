@@ -18,6 +18,12 @@ vim.keymap.set("n", "<c-left>", "<c-w>5<")
 vim.keymap.set("n", "<c-up>", "<c-w>5+")
 vim.keymap.set("n", "<c-down>", "<c-w>5-")
 
+vim.keymap.set("n", "tn", "<cmd>tabnew<CR>")
+vim.keymap.set("n", "tk", "<cmd>tabnext<CR>")
+vim.keymap.set("n", "tj", "<cmd>tabprev<CR>")
+vim.keymap.set("n", "th", "<cmd>tabfirst<CR>")
+vim.keymap.set("n", "tl", "<cmd>tablast<CR>")
+
 vim.keymap.set("n", "<leader>q", function()
     vim.fn.setqflist({ { filename = vim.fn.expand("%"), lnum = 1, col = 1, text = vim.fn.expand("%") } }, "a")
 end)
