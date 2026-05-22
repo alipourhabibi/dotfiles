@@ -1,5 +1,6 @@
 return {
     "epwalsh/obsidian.nvim",
+    conceallevel = 1,
     version = "*", -- recommended, use latest release instead of latest commit
     lazy = true,
     ft = "markdown",
