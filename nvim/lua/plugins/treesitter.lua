@@ -14,7 +14,7 @@ return {
             auto_install = true,
             highlight = {
                 enable = true,
-                additional_vim_regex_highlighting = true,
+                additional_vim_regex_highlighting = false,
                 disable = { "latex" },
             },
             indent = {

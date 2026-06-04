@@ -1,0 +1,5 @@
+#!/bin/bash
+chromium --new-window "$1" &
+sleep 0.8
+# move the new chromium window to the right 60% of your screen
+i3-msg "[class=\"Chromium\"] move right, resize set 60 ppt 100 ppt"
