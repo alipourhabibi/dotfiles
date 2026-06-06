@@ -119,8 +119,9 @@ cp_ gtk-3.0/settings.ini        "$HOME/.config/gtk-3.0/settings.ini"
 cp_ gtk-4.0/settings.ini        "$HOME/.config/gtk-4.0/settings.ini"
 
 info "Applying dark mode..."
-gsettings set org.gnome.desktop.interface color-scheme prefer-dark 2>/dev/null || true
-gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark   2>/dev/null || true
+gsettings set org.gnome.desktop.interface color-scheme prefer-dark  2>/dev/null || true
+gsettings set org.gnome.desktop.interface gtk-theme   Adwaita-dark  2>/dev/null || true
+gsettings set org.gnome.desktop.interface icon-theme  Papirus-Dark  2>/dev/null || true
 
 info "Detecting sensors..."
 sudo sensors-detect --auto 2>/dev/null || true

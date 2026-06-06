@@ -66,6 +66,10 @@ layout {
     struts {}
 }
 
+environment {
+    GTK_THEME "Adwaita:dark"
+}
+
 spawn-at-startup "waybar"
 spawn-at-startup "mako"
 spawn-at-startup "nm-applet" "--indicator"
