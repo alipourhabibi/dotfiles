@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+case "$1" in
+    up)   brightnessctl --class=backlight set +10% ;;
+    down) brightnessctl --class=backlight set 10%- ;;
+esac
+
+MAX=$(brightnessctl --class=backlight max)
+CUR=$(brightnessctl --class=backlight get)
+PCT=$(( CUR * 100 / MAX ))
+
+FILLED=$(( PCT / 5 ))
+BAR=""
+for i in $(seq 1 20); do
+    [[ $i -le $FILLED ]] && BAR="${BAR}█" || BAR="${BAR}░"
+done
+
+[[ "$PCT" -ge 70 ]] && ICON="󰃠" || { [[ "$PCT" -ge 30 ]] && ICON="󰃟" || ICON="󰃞"; }
+
+notify-send \
+    -a "brightness-osd" \
+    -h string:x-canonical-private-synchronous:brightness-osd \
+    -t 1500 \
+    "${ICON}  Brightness" "${BAR}  ${PCT}%"

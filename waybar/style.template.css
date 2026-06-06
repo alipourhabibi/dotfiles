@@ -1,0 +1,151 @@
+* {
+    font-family: "JetBrainsMono Nerd Font", "Noto Sans Mono", monospace;
+    font-size: 12px;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+    min-width: 0;
+}
+
+window#waybar {
+    background: __C_BG_RGBA__;
+    color: __C_FG__;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+}
+
+window#waybar.hidden {
+    opacity: 0.12;
+}
+
+/* Workspaces */
+#workspaces {
+    margin: 0 4px;
+}
+
+#workspaces button {
+    padding: 0 11px;
+    background: transparent;
+    color: __C_DIM__;
+    border-top: 2px solid transparent;
+    border-radius: 0;
+    font-size: 12px;
+    font-weight: bold;
+    transition: all 0.12s ease;
+}
+
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #a1a1aa;
+}
+
+#workspaces button.active {
+    color: __C_ACCENT__;
+    border-top: 2px solid __C_ACCENT__;
+    background: __C_ACCENT_A__;
+}
+
+#workspaces button.urgent {
+    color: __C_CRIT__;
+    background: __C_CRIT_A__;
+    border-top: 2px solid __C_CRIT__;
+}
+
+/* Clock */
+#clock.time {
+    font-size: 13px;
+    font-weight: bold;
+    color: #ffffff;
+    padding: 0 6px;
+    letter-spacing: 1px;
+}
+
+#clock.date {
+    font-size: 12px;
+    font-weight: 500;
+    color: #ffffff;
+    padding: 0 4px;
+    opacity: 0.65;
+}
+
+/* Modules */
+#custom-temp,
+#cpu,
+#memory,
+#custom-storage-root,
+#network,
+#pulseaudio,
+#battery {
+    padding: 0 8px;
+}
+
+#custom-temp  { color: __C_TEMP__; }
+#cpu          { color: __C_CPU__; }
+#memory       { color: __C_MEM__; }
+#custom-storage-root { color: __C_DISK__; }
+#network      { color: __C_NET__; }
+#pulseaudio   { color: __C_AUDIO__; }
+#battery      { color: __C_BAT__; }
+
+#network.disconnected { color: __C_CRIT__; }
+#pulseaudio.muted     { color: __C_DIM__; }
+
+#battery.charging,
+#battery.plugged  { color: __C_NET__; }
+#battery.full     { color: __C_MEM__; }
+#battery.warning:not(.charging)  { color: __C_WARN__; }
+
+@keyframes blink {
+    to {
+        color: #ffffff;
+        background: __C_CRIT_A__;
+    }
+}
+
+#battery.critical:not(.charging) {
+    color: __C_CRIT__;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* Tray */
+#tray {
+    padding: 0 6px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background: __C_CRIT_A__;
+}
+
+/* Power */
+#custom-power {
+    color: #52525b;
+    font-size: 14px;
+    padding: 0 12px;
+    transition: all 0.12s ease;
+}
+
+#custom-power:hover {
+    color: __C_CRIT__;
+    background: __C_CRIT_A__;
+}
+
+/* Tooltip */
+tooltip {
+    background: __C_BG_RGBA__;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 8px;
+    color: __C_FG__;
+}
+
+tooltip label {
+    color: __C_FG__;
+}

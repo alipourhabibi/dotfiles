@@ -1,0 +1,180 @@
+#!/usr/bin/env bash
+# pick wallpaper via rofi, extract palette with matugen, apply to waybar/niri/rofi/mako
+
+set -euo pipefail
+
+WALLPAPER_DIR="${WALLPAPER_DIR:-$HOME/.config/wallpapers}"
+CONFIGFILES="$HOME/.config"
+WAYBAR_TEMPLATE="$CONFIGFILES/waybar/style.template.css"
+WAYBAR_STYLE="$CONFIGFILES/waybar/style.css"
+NIRI_CONFIG="$CONFIGFILES/niri/config.kdl"
+ROFI_COLORS="$CONFIGFILES/rofi/colors.rasi"
+MAKO_TEMPLATE="$CONFIGFILES/mako/config.template"
+MAKO_CONFIG="$CONFIGFILES/mako/config"
+
+mkdir -p "$WALLPAPER_DIR"
+
+mapfile -t IMAGES < <(find "$WALLPAPER_DIR" -maxdepth 2 \
+    \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) \
+    -type f | sort)
+
+[[ ${#IMAGES[@]} -eq 0 ]] && { echo "No images in $WALLPAPER_DIR" >&2; exit 1; }
+
+# pipe directly to avoid $() stripping null bytes from rofi icon format
+SELECTED_BASE=$(
+    for img in "${IMAGES[@]}"; do
+        printf '%s\x00icon\x1f%s\n' "$(basename "$img")" "$img"
+    done | rofi -dmenu -i \
+        -p "Wallpaper" \
+        -theme-str 'window { width: 95%; height: 92%; location: center; y-offset: 0px; } listview { columns: 6; lines: 6; } element-icon { size: 160px; }' \
+        -config "$HOME/.config/rofi/config.rasi" \
+        -show-icons
+) || exit 0
+
+[[ -z "$SELECTED_BASE" ]] && exit 0
+
+FULL_PATH=""
+for img in "${IMAGES[@]}"; do
+    [[ "$(basename "$img")" == "$SELECTED_BASE" ]] && { FULL_PATH="$img"; break; }
+done
+[[ -z "$FULL_PATH" ]] && { echo "Could not resolve: $SELECTED_BASE" >&2; exit 1; }
+
+pkill swaybg 2>/dev/null || true
+swaybg -i "$FULL_PATH" -m fill &
+disown
+
+eval "$(matugen image "$FULL_PATH" -m dark -j hex --dry-run --prefer=saturation | python3 -c "
+import sys, json
+
+d = json.load(sys.stdin)
+c = d['colors']
+
+def get(key):
+    return c[key]['dark']['color']
+
+def hex_to_rgb(h):
+    h = h.lstrip('#')
+    return tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
+
+def rgba(h, a):
+    r, g, b = hex_to_rgb(h)
+    return 'rgba(%d,%d,%d,%s)' % (r, g, b, a)
+
+def blend_hex(fg, bg, alpha):
+    fr, fg2, fb = hex_to_rgb(fg)
+    br, bg2, bb = hex_to_rgb(bg)
+    r = int(fr*alpha + br*(1-alpha))
+    g = int(fg2*alpha + bg2*(1-alpha))
+    b = int(fb*alpha + bb*(1-alpha))
+    return '#{:02x}{:02x}{:02x}'.format(r, g, b)
+
+def hex_alpha(h, a):
+    r, g, b = hex_to_rgb(h)
+    aa = int(float(a) * 255)
+    return '#{:02x}{:02x}{:02x}{:02x}'.format(r, g, b, aa)
+
+bg    = get('surface_container_lowest')
+fg    = get('on_surface')
+accent= get('primary')
+cpu   = get('secondary')
+mem   = get('tertiary')
+temp  = get('on_primary_container')
+disk  = get('on_secondary_container')
+net   = get('on_tertiary_container')
+audio = get('on_surface_variant')
+crit  = get('error')
+warn  = get('tertiary')
+
+dim_hex = blend_hex(fg, bg, 0.25)
+crit_bg = blend_hex(crit, bg, 0.12)
+
+print('C_BG=\"%s\"'           % bg)
+print('C_BG_RGBA=\"%s\"'      % rgba(bg, '0.70'))
+print('C_BG_RGBA_ROFI=\"%s\"' % rgba(bg, '0.92'))
+print('C_BG_MAKO=\"%s\"'      % hex_alpha(bg, 0.92))
+print('C_CRIT_BG_MAKO=\"%s\"' % hex_alpha(crit_bg, 0.92))
+print('C_FG=\"%s\"'           % fg)
+print('C_DIM=\"%s\"'          % rgba(fg, '0.18'))
+print('C_DIM_HEX=\"%s\"'      % dim_hex)
+print('C_ACCENT=\"%s\"'       % accent)
+print('C_ACCENT_A=\"%s\"'     % rgba(accent, '0.08'))
+print('C_CPU=\"%s\"'          % cpu)
+print('C_MEM=\"%s\"'          % mem)
+print('C_TEMP=\"%s\"'         % temp)
+print('C_DISK=\"%s\"'         % disk)
+print('C_NET=\"%s\"'          % net)
+print('C_AUDIO=\"%s\"'        % audio)
+print('C_BAT=\"%s\"'          % mem)
+print('C_WARN=\"%s\"'         % warn)
+print('C_CRIT=\"%s\"'         % crit)
+print('C_CRIT_A=\"%s\"'       % rgba(crit, '0.20'))
+")"
+
+apply_template() {
+    python3 -c "
+import sys
+text = open(sys.argv[1]).read()
+for pair in sys.argv[3:]:
+    k, v = pair.split('=', 1)
+    text = text.replace(k, v)
+open(sys.argv[2], 'w').write(text)
+" "$1" "$2" "${@:3}"
+}
+
+apply_template "$WAYBAR_TEMPLATE" "$WAYBAR_STYLE" \
+    "__C_BG_RGBA__=$C_BG_RGBA"   \
+    "__C_FG__=$C_FG"             \
+    "__C_ACCENT__=$C_ACCENT"     \
+    "__C_ACCENT_A__=$C_ACCENT_A" \
+    "__C_DIM__=$C_DIM"           \
+    "__C_CPU__=$C_CPU"           \
+    "__C_MEM__=$C_MEM"           \
+    "__C_TEMP__=$C_TEMP"         \
+    "__C_DISK__=$C_DISK"         \
+    "__C_NET__=$C_NET"           \
+    "__C_AUDIO__=$C_AUDIO"       \
+    "__C_BAT__=$C_BAT"           \
+    "__C_WARN__=$C_WARN"         \
+    "__C_CRIT__=$C_CRIT"         \
+    "__C_CRIT_A__=$C_CRIT_A"
+
+apply_template "$MAKO_TEMPLATE" "$MAKO_CONFIG" \
+    "__C_BG_MAKO__=$C_BG_MAKO"         \
+    "__C_FG__=$C_FG"                    \
+    "__C_ACCENT__=$C_ACCENT"            \
+    "__C_WARN__=$C_WARN"                \
+    "__C_CRIT__=$C_CRIT"                \
+    "__C_CRIT_BG_MAKO__=$C_CRIT_BG_MAKO"
+
+python3 -c "
+import re, sys
+text = open(sys.argv[1]).read()
+text = re.sub(
+    r'(focus-ring\s*\{[^}]*?active-color\s+\")[^\"]+\"',
+    r'\g<1>' + sys.argv[2] + '\"',
+    text, flags=re.DOTALL
+)
+open(sys.argv[1], 'w').write(text)
+" "$NIRI_CONFIG" "$C_ACCENT"
+
+cat <<RASI > "$ROFI_COLORS"
+* {
+    bg:      ${C_BG};
+    bg-rgba: ${C_BG_RGBA_ROFI};
+    fg:      ${C_FG};
+    accent:  ${C_ACCENT};
+    dim:     ${C_DIM_HEX};
+    warn:    ${C_WARN};
+    crit:    ${C_CRIT};
+}
+RASI
+
+pkill waybar 2>/dev/null || true
+sleep 0.3
+waybar & disown
+
+makoctl reload 2>/dev/null || true
+niri msg action reload-config 2>/dev/null || true
+
+echo "wallpaper: $FULL_PATH"
+echo "bg=$C_BG fg=$C_FG accent=$C_ACCENT"

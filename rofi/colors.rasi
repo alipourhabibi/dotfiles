@@ -1,0 +1,9 @@
+* {
+    bg:      #000000;
+    bg-rgba: rgba(0,0,0,0.92);
+    fg:      #FDFDFD;
+    accent:  #014E71;
+    dim:     #3f3f3f;
+    warn:    #026896;
+    crit:    #f87171;
+}

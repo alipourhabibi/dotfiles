@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+case "$1" in
+    up)      pactl set-sink-volume @DEFAULT_SINK@ +5% ;;
+    down)    pactl set-sink-volume @DEFAULT_SINK@ -5% ;;
+    mute)    pactl set-sink-mute @DEFAULT_SINK@ toggle ;;
+    micmute) pactl set-source-mute @DEFAULT_SOURCE@ toggle; exit 0 ;;
+esac
+
+VOL=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+%' | head -1 | tr -d '%')
+MUTED=$(pactl get-sink-mute @DEFAULT_SINK@ | grep -c "yes" || true)
+
+if [[ "$MUTED" -gt 0 ]]; then
+    ICON="󰝟"
+    BAR="$(printf '░%.0s' {1..20})"
+    LABEL="Muted"
+else
+    [[ "$VOL" -ge 70 ]] && ICON="󰕾" || { [[ "$VOL" -ge 30 ]] && ICON="󰖀" || ICON="󰕿"; }
+    FILLED=$(( VOL / 5 ))
+    BAR=""
+    for i in $(seq 1 20); do
+        [[ $i -le $FILLED ]] && BAR="${BAR}█" || BAR="${BAR}░"
+    done
+    LABEL="${VOL}%"
+fi
+
+notify-send \
+    -a "volume-osd" \
+    -h string:x-canonical-private-synchronous:volume-osd \
+    -t 1500 \
+    "${ICON}  Volume" "${BAR}  ${LABEL}"
