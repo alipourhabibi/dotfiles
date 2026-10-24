@@ -1,7 +1,7 @@
 font=JetBrainsMono Nerd Font 12
-background-color=#0d0d0deb
-text-color=#FDFDFD
-border-color=#014E71
+background-color=#090f10ea
+text-color=#dee4e4
+border-color=#81d3df
 border-radius=10
 border-size=1
 width=360
@@ -16,29 +16,29 @@ layer=overlay
 anchor=top-right
 
 [urgency=low]
-border-color=#014E71
+border-color=#81d3df
 default-timeout=4000
 
 [urgency=normal]
-border-color=#014E71
+border-color=#81d3df
 default-timeout=6000
 
 [urgency=high]
-border-color=#f87171
-text-color=#f87171
-background-color=#1a0000eb
+border-color=#ffb4ab
+text-color=#ffb4ab
+background-color=#262222ea
 default-timeout=0
 
 [app-name=volume-osd]
 anchor=top-center
-border-color=#014E71
+border-color=#81d3df
 width=340
 margin=16
 default-timeout=1500
 
 [app-name=brightness-osd]
 anchor=top-center
-border-color=#fbbf24
+border-color=#b9c6ea
 width=340
 margin=16
 default-timeout=1500

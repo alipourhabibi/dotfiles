@@ -73,6 +73,7 @@ window#waybar.hidden {
 #cpu,
 #memory,
 #custom-storage-root,
+#custom-dnd,
 #network,
 #pulseaudio,
 #battery {
@@ -88,6 +89,8 @@ window#waybar.hidden {
 #battery      { color: __C_BAT__; }
 
 #network.disconnected { color: __C_CRIT__; }
+#custom-dnd.off      { color: #d5c3b6; }
+#custom-dnd.on       { color: #ffb4ab; }
 #pulseaudio.muted     { color: __C_DIM__; }
 
 #battery.charging,

@@ -16,7 +16,7 @@ Waybar, rofi, mako, and the niri focus ring all update on wallpaper change (`Mod
 ### Setup
 
 ```bash
-./init.sh
+sudo ./init.sh
 ```
 
-Installs packages, copies configs, applies dark mode. After first login, press `Mod+Shift+W` to pick a wallpaper and apply the color palette.
+Run as your normal user with sudo. Installs pacman + AUR packages (installs yay if missing), oh-my-zsh + plugins, tmux/nvim plugins, copies all configs, sets zsh as shell, applies dark mode. After first login, press `Mod+Shift+W` to pick a wallpaper and apply the color palette.

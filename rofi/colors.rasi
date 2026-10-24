@@ -1,9 +1,9 @@
 * {
-    bg:      #000000;
-    bg-rgba: rgba(0,0,0,0.92);
-    fg:      #FDFDFD;
-    accent:  #014E71;
-    dim:     #3f3f3f;
-    warn:    #026896;
-    crit:    #f87171;
+    bg:      #090f10;
+    bg-rgba: rgba(9,15,16,0.92);
+    fg:      #dee4e4;
+    accent:  #81d3df;
+    dim:     #3e4445;
+    warn:    #b9c6ea;
+    crit:    #ffb4ab;
 }

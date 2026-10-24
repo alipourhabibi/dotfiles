@@ -1,0 +1,31 @@
+[url "git@gitlab.com:"]
+	insteadOf = https://gitlab.com/
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[user]
+	name = Ali Pourhabibi
+	email = ali.pourhabibi1379@gmail.com
+[core]
+	editor = nvim
+
+[merge]
+	tool = "nvim"
+
+[mergetool]
+	keepBackup = false
+	prompt = false
+
+[mergetool "nvim"]
+	cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
+
+[url "ssh://git@bitbucket.org/"]
+	insteadOf = https://bitbucket.org/
+[url "git@gitlab.datanova.ir:"]
+	insteadOf = https://gitlab.datanova.ir/
+[url "git@gitlab.datanova.ir:"]
+	insteadOf = http://gitlab.datanova.ir/
+
+[url "git@gitlab1.datanova.ir:"]
+	insteadOf = https://gitlab1.datanova.ir/
+[url "git@gitlab1.datanova.ir:"]
+	insteadOf = http://gitlab1.datanova.ir/

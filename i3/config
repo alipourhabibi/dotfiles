@@ -43,8 +43,8 @@ exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 bindsym $mod+Shift+p exec "if xrandr --listactivemonitors | grep -q 'eDP1'; then `xrandr --output eDP1 --off`; else `xrandr --output eDP1 --auto`; fi"
@@ -58,7 +58,7 @@ floating_modifier $mod
 # start a terminal
 # bindsym $mod+Return exec i3-sensible-terminal
 #bindsym $mod+Return exec konsole
-bindsym $mod+Return exec konsole
+bindsym $mod+Return exec ghostty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -237,8 +237,8 @@ hide_edge_borders both
 bindsym $mod+shift+x exec i3lock -i ~/.config/i3/lock.png
 
 # brightness
-bindsym XF86MonBrightnessDown exec light -U 10
-bindsym XF86MonBrightnessUp exec light -A 10
+bindsym XF86MonBrightnessDown exec brightnessctl -e4 -n2 set 4%-
+bindsym XF86MonBrightnessUp exec brightnessctl -e4 -n2 set 4%+
 
 # transparnt
 #exec_always compton
@@ -246,6 +246,7 @@ exec_always --no-startup-id picom -b --config ~/.config/picom/picom.conf
 
 # screenshot
 bindsym Print exec gnome-screenshot -a
+bindsym $mod+P exec gnome-screenshot -a
 
 #############################
 ### settings for i3-gaps: ###

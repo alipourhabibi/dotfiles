@@ -43,7 +43,7 @@ layout {
 
     focus-ring {
         width 4
-        active-color "#014E71"
+        active-color "#81d3df"
         inactive-color "#2f343f"
     }
 
@@ -121,6 +121,7 @@ binds {
     Super+Alt+L hotkey-overlay-title="Lock the Screen" { spawn "swaylock"; }
 
     Mod+Shift+C { spawn-sh "niri msg action reload-config"; }
+    Mod+N hotkey-overlay-title="Toggle Do Not Disturb" { spawn-sh "makoctl mode -t do-not-disturb; pkill -RTMIN+8 waybar"; }
 
     Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
 
@@ -277,4 +278,18 @@ binds {
     Ctrl+Alt+Delete { quit; }
 
     Mod+Shift+P { power-off-monitors; }
+}
+
+window-rule {
+    match app-id="Pomatez"
+    open-focused true
+    open-fullscreen true
+}
+
+window-rule {
+    match app-id="Pomatez" is-urgent=true
+    border {
+        on
+        urgent-color "#ff0000"
+    }
 }

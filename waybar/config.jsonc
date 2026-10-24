@@ -20,6 +20,7 @@
         "network",
         "pulseaudio",
         "battery",
+        "custom/dnd",
         "tray",
         "custom/power"
     ],
@@ -47,6 +48,14 @@
         "format": "󰔏 {}°",
         "interval": 5,
         "tooltip": false
+    },
+
+    "custom/dnd": {
+        "exec": "~/.config/waybar/modules/dnd.sh",
+        "return-type": "json",
+        "interval": "once",
+        "signal": 8,
+        "on-click": "makoctl mode -t do-not-disturb >/dev/null; pkill -RTMIN+8 waybar"
     },
 
     "custom/storage-root": {
