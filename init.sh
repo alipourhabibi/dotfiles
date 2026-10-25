@@ -38,7 +38,7 @@ PACMAN_PKGS=(
     # Terminal & shell
     ghostty zsh tmux fzf
     # Editor + tooling for nvim plugins / mason
-    neovim ripgrep fd gcc make nodejs npm python python-pip go
+    neovim tree-sitter-cli ripgrep fd gcc make nodejs npm python python-pip go
     # CLI tools
     lazygit btop k9s kubectl
     # Tray & clipboard
