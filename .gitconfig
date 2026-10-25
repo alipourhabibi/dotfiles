@@ -20,12 +20,7 @@
 
 [url "ssh://git@bitbucket.org/"]
 	insteadOf = https://bitbucket.org/
-[url "git@gitlab.datanova.ir:"]
-	insteadOf = https://gitlab.datanova.ir/
-[url "git@gitlab.datanova.ir:"]
-	insteadOf = http://gitlab.datanova.ir/
 
-[url "git@gitlab1.datanova.ir:"]
-	insteadOf = https://gitlab1.datanova.ir/
-[url "git@gitlab1.datanova.ir:"]
-	insteadOf = http://gitlab1.datanova.ir/
+# machine-specific / work settings, not tracked
+[include]
+	path = ~/.gitconfig.local

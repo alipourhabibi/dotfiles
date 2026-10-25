@@ -41,7 +41,7 @@ return {
         vim.g.mkdp_open_ip = ""
         -- Let the plugin open your default browser. To force one:
         -- vim.g.mkdp_browser = "firefox"
-        vim.g.mkdp_browser = "/home/ali/.config/nvim/md-previwe"
+        vim.g.mkdp_browser = vim.fn.stdpath("config") .. "/md-previwe"
         -- Echo the preview URL when the server starts.
         vim.g.mkdp_echo_preview_url = 0
         -- Theme: "dark", "light", or remove to follow the system preference.

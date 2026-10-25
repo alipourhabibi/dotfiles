@@ -64,7 +64,7 @@ bindsym $mod+Return exec ghostty
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec rofi -show run -config /home/ali/.config/rofi/config.rasi
+bindsym $mod+d exec rofi -show run -config $HOME/.config/rofi/config.rasi
 #bindsym $mod+d exec rofi -lines 12 -padding 18 -width 50 -location 0 -show drun -sidebar-mode -columns 3 -font 'System San Francisco Display 10'
 #bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 800 -opacity "85" -bw 0 -bc $bg-color -bg $bg-color -fg $text-color -hlbg $bg-color -hlfg "#9575cd" -font "System San Francisco Display 18"
 

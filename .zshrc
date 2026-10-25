@@ -115,7 +115,7 @@ alias j="jump"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export PATH=$PATH:/home/ali/go/bin
+export PATH=$PATH:$HOME/go/bin
 export EDITOR=nvim
 
 bindkey -s ^f "tmux-sessionizer\n"
