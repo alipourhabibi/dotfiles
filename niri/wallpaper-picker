@@ -25,8 +25,8 @@ SELECTED_BASE=$(
     for img in "${IMAGES[@]}"; do
         printf '%s\x00icon\x1f%s\n' "$(basename "$img")" "$img"
     done | rofi -dmenu -i \
-        -p "Wallpaper" \
-        -theme-str 'window { width: 95%; height: 92%; location: center; y-offset: 0px; } listview { columns: 6; lines: 6; } element-icon { size: 160px; }' \
+        -p "Wallpaper" -scroll-method 1 \
+        -theme-str 'window { width: 95%; height: 92%; location: center; y-offset: 0px; } listview { columns: 6; lines: 6; flow: horizontal; scrollbar: true; } element-icon { size: 160px; }' \
         -config "$HOME/.config/rofi/config.rasi" \
         -show-icons
 ) || exit 0
@@ -38,6 +38,10 @@ for img in "${IMAGES[@]}"; do
     [[ "$(basename "$img")" == "$SELECTED_BASE" ]] && { FULL_PATH="$img"; break; }
 done
 [[ -z "$FULL_PATH" ]] && { echo "Could not resolve: $SELECTED_BASE" >&2; exit 1; }
+
+# remembered for next login (niri spawn-sh-at-startup reads it)
+mkdir -p "$HOME/.local/state"
+ln -sf "$FULL_PATH" "$HOME/.local/state/wallpaper"
 
 pkill swaybg 2>/dev/null || true
 swaybg -i "$FULL_PATH" -m fill &

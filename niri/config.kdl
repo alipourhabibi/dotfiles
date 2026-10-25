@@ -73,8 +73,8 @@ environment {
 spawn-at-startup "waybar"
 spawn-at-startup "mako"
 spawn-at-startup "nm-applet" "--indicator"
-// set a wallpaper on first login; after that wallpaper-picker (Mod+Shift+W) handles it
-/-spawn-at-startup "swaybg" "-i" "/path/to/wallpaper.png" "-m" "fill"
+// restore last wallpaper picked with wallpaper-picker (Mod+Shift+W)
+spawn-sh-at-startup "swaybg -i ~/.local/state/wallpaper -m fill"
 spawn-at-startup "clipit"
 
 hotkey-overlay {
@@ -117,8 +117,8 @@ binds {
     Mod+D hotkey-overlay-title="Run an Application: rofi" { spawn-sh "rofi -show run -config $HOME/.config/rofi/config.rasi"; }
     Mod+Shift+W hotkey-overlay-title="Pick Wallpaper" { spawn-sh "$HOME/.config/niri/wallpaper-picker"; }
 
-    Mod+Shift+X hotkey-overlay-title="Lock the Screen" { spawn "swaylock"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen" { spawn "swaylock"; }
+    Mod+Shift+X hotkey-overlay-title="Lock the Screen" { spawn-sh "swaylock -f -i ~/.config/niri/lock.png -s fill"; }
+    Super+Alt+L hotkey-overlay-title="Lock the Screen" { spawn-sh "swaylock -f -i ~/.config/niri/lock.png -s fill"; }
 
     Mod+Shift+C { spawn-sh "niri msg action reload-config"; }
     Mod+N hotkey-overlay-title="Toggle Do Not Disturb" { spawn-sh "makoctl mode -t do-not-disturb; pkill -RTMIN+8 waybar"; }
