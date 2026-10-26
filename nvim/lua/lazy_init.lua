@@ -15,4 +15,9 @@ require("lazy").setup("plugins", {
 	change_detection = {
 		notify = false,
 	},
+	-- plugins marked dev = true load from ~/projs when they are there
+	dev = {
+		path = "~/projs",
+		fallback = true,
+	},
 })

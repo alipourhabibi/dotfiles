@@ -11,6 +11,8 @@ return {
     end,
     opts = {
         legacy_commands = false,
+        -- render-markdown.nvim draws the markdown
+        ui = { enable = false },
         workspaces = {
             { name = "secondBrain", path = "~/obsidian/SecondBrain/SecondBrain" },
         },
