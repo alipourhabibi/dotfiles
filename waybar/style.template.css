@@ -51,6 +51,15 @@ window#waybar.hidden {
     border-top: 2px solid __C_CRIT__;
 }
 
+/* Hide empty workspaces like i3, keep the focused one */
+#workspaces button.empty:not(.active) {
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+    font-size: 0;
+    border: none;
+}
+
 /* Clock */
 #clock.time {
     font-size: 13px;
