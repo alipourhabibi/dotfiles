@@ -12,10 +12,14 @@ return {
         },
         dashboard = {
             main = "todo",
-            tabs = { "today", "shortmind", "backlog", "routine", "agenda" },
+            tabs = { "today", "shortmind", "backlog", "routine", "agenda", "time" },
         },
         capture = { "shortmind", "today" },
         inbox = { "0-Inbox", "inbox-notes" },
         sync_message = "Last Sync: %Y-%m-%d %H:%M (Laptop)",
+        timer = {
+            note = "2-Areas/timings/timings.md",
+            reports = "2-Areas/timings/reports",
+        },
     },
 }
