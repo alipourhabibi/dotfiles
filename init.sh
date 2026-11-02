@@ -34,14 +34,15 @@ PACMAN_PKGS=(
     # Launcher
     rofi-wayland
     # Wallpaper & lock
-    swaybg swaylock
+    swaybg swaylock wlsunset
     # Terminal & shell
     ghostty zsh tmux fzf
     # Editor + tooling for nvim plugins / mason
     neovim tree-sitter-cli ripgrep fd gcc make nodejs npm python python-pip go
     # CLI tools
     lazygit btop k9s kubectl
-    # Tray & clipboard
+    # Tray, clipboard & phone link
+    kdeconnect
     networkmanager network-manager-applet wl-clipboard cliphist
     # Media & audio
     pipewire pipewire-pulse wireplumber playerctl pavucontrol

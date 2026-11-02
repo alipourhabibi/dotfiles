@@ -7,7 +7,7 @@ critical=10
 df -h -P -l "$mount" | awk -v warning=$warning -v critical=$critical '
 /\/.*/ {
   text=$4
-  tooltip="Filesystem: "$1"\rSize: "$2"\rUsed: "$3"\rAvail: "$4"\rUse%: "$5"\rMounted on: "$6
+  tooltip="Filesystem: "$1"\\nSize: "$2"\\nUsed: "$3"\\nAvail: "$4"\\nUse%: "$5"\\nMounted on: "$6
   use=$5
   exit 0
 }

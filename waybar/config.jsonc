@@ -20,6 +20,7 @@
         "network",
         "pulseaudio",
         "battery",
+        "custom/nightlight",
         "custom/dnd",
         "tray",
         "custom/power"
@@ -56,6 +57,14 @@
         "interval": "once",
         "signal": 8,
         "on-click": "makoctl mode -t do-not-disturb >/dev/null; pkill -RTMIN+8 waybar"
+    },
+
+    "custom/nightlight": {
+        "exec": "~/.config/waybar/modules/nightlight.sh",
+        "return-type": "json",
+        "interval": "once",
+        "signal": 9,
+        "on-click": "~/.config/waybar/modules/nightlight.sh toggle"
     },
 
     "custom/storage-root": {

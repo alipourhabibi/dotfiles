@@ -83,6 +83,7 @@ window#waybar.hidden {
 #memory,
 #custom-storage-root,
 #custom-dnd,
+#custom-nightlight,
 #network,
 #pulseaudio,
 #battery {
@@ -100,6 +101,8 @@ window#waybar.hidden {
 #network.disconnected { color: #ffb4ab; }
 #custom-dnd.off      { color: #d5c3b6; }
 #custom-dnd.on       { color: #ffb4ab; }
+#custom-nightlight.off { color: #d5c3b6; }
+#custom-nightlight.on  { color: #ffcc80; }
 #pulseaudio.muted     { color: rgba(222,228,228,0.18); }
 
 #battery.charging,

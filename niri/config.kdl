@@ -87,6 +87,7 @@ spawn-at-startup "nm-applet" "--indicator"
 // restore last wallpaper picked with wallpaper-picker (Mod+Shift+W)
 spawn-sh-at-startup "swaybg -i ~/.local/state/wallpaper -m fill"
 spawn-at-startup "clipit"
+spawn-at-startup "kdeconnect-indicator"
 
 hotkey-overlay {
     skip-at-startup
