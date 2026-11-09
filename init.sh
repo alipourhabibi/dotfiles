@@ -91,6 +91,15 @@ as_user chmod +x "$H"/.config/niri/{wallpaper-picker,volume-osd,brightness-osd} 
 as_user mkdir -p "$H/Pictures/Screenshots" "$H/scripts"
 as_user cp -rT "$DOTFILES/scripts/tmux" "$H/scripts/tmux"
 
+# firefox profile only exists after first launch
+FFP=$(ls -d "$H"/.mozilla/firefox/*.default-release 2>/dev/null | head -1)
+if [[ -n "$FFP" ]]; then
+    as_user cp "$DOTFILES/firefox/user.js" "$FFP/user.js"
+    echo "  firefox/user.js → $FFP"
+else
+    warn "No Firefox profile yet - open Firefox once, then: cp firefox/user.js ~/.mozilla/firefox/*.default-release/"
+fi
+
 # ---------------------------------------------------------------- shell
 if [[ ! -d "$H/.oh-my-zsh" ]]; then
     info "Installing oh-my-zsh..."

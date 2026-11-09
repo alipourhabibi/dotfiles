@@ -9,6 +9,7 @@ Wayland desktop setup for Arch Linux.
 - **ghostty** - terminal
 - **nvim** - editor
 - **gtk-3.0 / gtk-4.0** - dark theme settings
+- **firefox** - `user.js`: vertical tabs, tab groups, compact dark, no ads/telemetry (bookmarks live in Firefox Sync)
 
 Colors are generated dynamically from the wallpaper using [matugen](https://github.com/InioX/matugen) (Material You).
 Waybar, rofi, mako, and the niri focus ring all update on wallpaper change (`Mod+Shift+W`).
