@@ -112,6 +112,9 @@ print('C_BAT=\"%s\"'          % mem)
 print('C_WARN=\"%s\"'         % warn)
 print('C_CRIT=\"%s\"'         % crit)
 print('C_CRIT_A=\"%s\"'       % rgba(crit, '0.20'))
+print('C_BG2=\"%s\"'          % blend_hex(accent, bg, 0.12))
+print('C_BG3=\"%s\"'          % blend_hex(accent, bg, 0.30))
+print('C_ON_ACCENT=\"%s\"'    % get('on_primary'))
 ")"
 
 apply_template() {
@@ -172,6 +175,23 @@ cat <<RASI > "$ROFI_COLORS"
     crit:    ${C_CRIT};
 }
 RASI
+
+# firefox: pywalfox reads pywal's colors.json and re-themes firefox live
+mkdir -p "$HOME/.cache/wal"
+cat <<JSON > "$HOME/.cache/wal/colors.json"
+{
+  "wallpaper": "$FULL_PATH",
+  "alpha": "100",
+  "special": { "background": "$C_BG2", "foreground": "$C_FG", "cursor": "$C_ACCENT" },
+  "colors": {
+    "color0": "$C_BG2", "color1": "$C_ACCENT", "color2": "$C_CPU", "color3": "$C_MEM",
+    "color4": "$C_TEMP", "color5": "$C_DISK", "color6": "$C_NET", "color7": "$C_FG",
+    "color8": "$C_BG3", "color9": "$C_ACCENT", "color10": "$C_CPU", "color11": "$C_MEM",
+    "color12": "$C_TEMP", "color13": "$C_DISK", "color14": "$C_NET", "color15": "$C_FG"
+  }
+}
+JSON
+command -v pywalfox >/dev/null && pywalfox update 2>/dev/null || true
 
 pkill waybar 2>/dev/null || true
 sleep 0.3

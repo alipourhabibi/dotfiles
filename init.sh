@@ -61,6 +61,8 @@ AUR_PKGS=(
     clipit    # clipboard history (niri autostart)
     wlogout   # waybar power button
     nvm       # sourced by .zshrc
+    python-pywalfox  # live firefox colors from wallpaper (+ Pywalfox addon)
+    zen-browser-bin  # firefox-based, workspaces + split view
 )
 
 info "Installing pacman packages..."
@@ -91,14 +93,16 @@ as_user chmod +x "$H"/.config/niri/{wallpaper-picker,volume-osd,brightness-osd} 
 as_user mkdir -p "$H/Pictures/Screenshots" "$H/scripts"
 as_user cp -rT "$DOTFILES/scripts/tmux" "$H/scripts/tmux"
 
-# firefox profile only exists after first launch
-FFP=$(ls -d "$H"/.mozilla/firefox/*.default-release 2>/dev/null | head -1)
-if [[ -n "$FFP" ]]; then
-    as_user cp "$DOTFILES/firefox/user.js" "$FFP/user.js"
-    echo "  firefox/user.js → $FFP"
-else
-    warn "No Firefox profile yet - open Firefox once, then: cp firefox/user.js ~/.mozilla/firefox/*.default-release/"
-fi
+# browser profiles only exist after first launch
+install_userjs() {  # $1 profile glob, $2 browser-specific user.js
+    local prof; prof=$(ls -d $1 2>/dev/null | head -1)
+    [[ -n "$prof" ]] || { warn "No profile for $2 yet - open the browser once, rerun"; return; }
+    cat "$DOTFILES/$2" "$DOTFILES/firefox/privacy.js" | as_user tee "$prof/user.js" >/dev/null
+    echo "  $2 + firefox/privacy.js → $prof/user.js"
+}
+install_userjs "$H/.mozilla/firefox/*.default-release" firefox/user.js
+install_userjs "$H/.config/zen/*release*" zen/user.js
+as_user pywalfox install || warn "pywalfox install failed"
 
 # ---------------------------------------------------------------- shell
 if [[ ! -d "$H/.oh-my-zsh" ]]; then
@@ -135,3 +139,4 @@ info "Done! Next steps:"
 echo "  1. Add your ssh key (~/.ssh) - .gitconfig pulls/pushes github/gitlab over ssh"
 echo "  2. Log out, then start niri from a tty:  niri-session"
 echo "  3. Pick wallpaper + apply palette:  Mod+Shift+W"
+echo "  4. Firefox: install the Pywalfox addon (addons.mozilla.org/firefox/addon/pywalfox), click Fetch Pywal colors"
