@@ -86,7 +86,8 @@ spawn-at-startup "mako"
 spawn-at-startup "nm-applet" "--indicator"
 // restore last wallpaper picked with wallpaper-picker (Mod+Shift+W)
 spawn-sh-at-startup "swaybg -i ~/.local/state/wallpaper -m fill"
-spawn-at-startup "clipit"
+// clipboard history (text + images), pick with Mod+Alt+V
+spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
 spawn-at-startup "kdeconnect-indicator"
 
 hotkey-overlay {
@@ -127,12 +128,13 @@ binds {
     Mod+T      hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
 
     Mod+D hotkey-overlay-title="Run an Application: rofi" { spawn-sh "rofi -show run -config $HOME/.config/rofi/config.rasi"; }
+    Mod+Alt+V hotkey-overlay-title="Clipboard History" { spawn-sh "cliphist list | rofi -dmenu -p clip -config $HOME/.config/rofi/config.rasi | cliphist decode | wl-copy"; }
     Mod+Shift+W hotkey-overlay-title="Pick Wallpaper" { spawn-sh "$HOME/.config/niri/wallpaper-picker"; }
 
     Mod+Shift+X hotkey-overlay-title="Lock the Screen" { spawn-sh "swaylock -f -i ~/.config/niri/lock.png -s fill"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen" { spawn-sh "swaylock -f -i ~/.config/niri/lock.png -s fill"; }
 
-    Mod+Shift+C { spawn-sh "niri msg action reload-config"; }
+    Mod+Shift+C { spawn-sh "niri msg action load-config-file"; }
     Mod+N hotkey-overlay-title="Toggle Do Not Disturb" { spawn-sh "makoctl mode -t do-not-disturb; pkill -RTMIN+8 waybar"; }
 
     Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }

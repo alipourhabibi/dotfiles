@@ -33,6 +33,8 @@ PACMAN_PKGS=(
     mako libnotify
     # Launcher
     rofi-wayland
+    # Clipboard history
+    cliphist wl-clipboard
     # Wallpaper & lock
     swaybg swaylock wlsunset
     # Terminal & shell
@@ -58,7 +60,6 @@ PACMAN_PKGS=(
 
 AUR_PKGS=(
     matugen   # Material You palette from wallpaper
-    clipit    # clipboard history (niri autostart)
     wlogout   # waybar power button
     nvm       # sourced by .zshrc
     python-pywalfox  # live firefox colors from wallpaper (+ Pywalfox addon)
